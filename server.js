@@ -72,6 +72,10 @@ app.post("/creatUser", (req, res) => {
   });
 });
 
+app.get("/messagerie", (req, res) => {
+  return res.send("La fummée blanche");
+});
+
 // Récupération de plusieurs utilisateurs
 app.get("/recupUsers", (req, res) => {
   const sql = "SELECT * FROM users ORDER BY idUser DESC";
