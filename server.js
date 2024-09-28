@@ -86,6 +86,10 @@ app.get("/recupUsers", (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  return res.send("Message de la lourdeur");
+});
+
 // Récupération d'un seul utilisateur
 app.get("/recupUser/:idUser", (req, res) => {
   const id = req.params.idUser;
