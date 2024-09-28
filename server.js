@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["https://frontend.fizitech.org/"],
+    origin: ["frontend.fizitech.org"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
