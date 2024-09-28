@@ -23,9 +23,9 @@ app.use(
 
 const options = {
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "lion_print",
+  user: "c2413927c_matota",
+  password: "A[q3[x8BC2Y%",
+  database: "c2413927c_lion-print",
 };
 
 const sessionStore = new MySQLStore(options);
