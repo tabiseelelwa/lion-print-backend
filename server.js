@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: ["frontend.fizitech.org"],
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["frontend.fizitech.org"],
+//     methods: ["POST", "GET", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
 
 const options = {
   host: "localhost",
