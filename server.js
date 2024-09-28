@@ -13,21 +13,21 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://frontend.fizitech.org"); // Allow requests from any origin
-  res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow requests from any origin
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
-// app.use(
-//   cors({
-//     origin: ["frontend.fizitech.org"],
-//     methods: ["POST", "GET", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
+// app.use(cors());
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "https://frontend.fizitech.org"); // Allow requests from any origin
+//   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow requests from any origin
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
+app.use(
+  cors({
+    origin: ["https://frontend.fizitech.org"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 const options = {
   host: "localhost",
