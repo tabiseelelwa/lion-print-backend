@@ -13,14 +13,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
-// app.use(cors());
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "https://frontend.fizitech.org"); // Allow requests from any origin
-//   res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow requests from any origin
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
+
 app.use(
   cors({
     origin: ["https://frontend.fizitech.org"],
@@ -78,10 +71,6 @@ app.post("/creatUser", (req, res) => {
     if (err) return res.json(err);
     return res.json(donnees);
   });
-});
-
-app.get("/messagerie", (req, res) => {
-  return res.send("La fummée blanche");
 });
 
 // Récupération de plusieurs utilisateurs
