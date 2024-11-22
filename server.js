@@ -24,7 +24,7 @@ app.use(
 
 const options = {
   host: "localhost",
-  user: "c2492334c_matota",
+  user: "c2492334c",
   password: "vNMY4j3Fk3JWdZz",
   database: "c2492334c_lion-print",
 };
