@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: ["https://frontend.fizitech.org"],
+    origin: ["https://lion-print.net"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
@@ -24,9 +24,9 @@ app.use(
 
 const options = {
   host: "localhost",
-  user: "c2413927c_matota",
-  password: "A[q3[x8BC2Y%",
-  database: "c2413927c_lion-print",
+  user: "c2492334c",
+  password: "vNMY4j3Fk3JWdZz",
+  database: "c2492334c_lion-print",
 };
 
 const sessionStore = new MySQLStore(options);
