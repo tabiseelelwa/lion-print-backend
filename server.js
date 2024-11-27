@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: ["https://www.lion-print.net"],
+    origin: ["https://lion-print.net"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
