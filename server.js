@@ -14,7 +14,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-const origin = ["http://localhost:3000"];
+const origin = ["https://www.lion-print.net"];
 
 app.use(
   cors({
@@ -24,19 +24,19 @@ app.use(
   })
 );
 
-// const options = {
-//   host: "localhost",
-//   user: "c2492334c_matota",
-//   password: "Le2502@#",
-//   database: "c2492334c_lion-print",
-// };
-
 const options = {
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "lion_print",
+  user: "c2492334c_matota",
+  password: "Le2502@#",
+  database: "c2492334c_lion-print",
 };
+
+// const options = {
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "lion_print",
+// };
 
 const sessionStore = new MySQLStore(options);
 
