@@ -14,19 +14,28 @@ app.use(express.static("public"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+const origin = ["http://localhost:3000"];
+
 app.use(
   cors({
-    origin: ["https://www.lion-print.net"],
+    origin: origin,
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
+// const options = {
+//   host: "localhost",
+//   user: "c2492334c_matota",
+//   password: "Le2502@#",
+//   database: "c2492334c_lion-print",
+// };
+
 const options = {
   host: "localhost",
-  user: "c2492334c_matota",
-  password: "Le2502@#",
-  database: "c2492334c_lion-print",
+  user: "root",
+  password: "",
+  database: "lion_print",
 };
 
 const sessionStore = new MySQLStore(options);
@@ -295,7 +304,11 @@ app.delete("/suppClient/:numCli", (req, res) => {
 
 // Création d'une commande
 app.post("/commande", (req, res) => {
-  const num = "CDE_" + Date.now() * 4;
+  const num =
+    "LP" +
+    Date.now().toString().substring(10, 13) +
+    "-" +
+    moment(Date.now()).format("DDMMYY");
   const date = moment(Date.now()).format("DD-MM-YYYY HH:mm:ss");
   const nomUser = req.session.nomUser;
   const sql =
@@ -392,12 +405,13 @@ app.delete("/suppCde/:numCom", (req, res) => {
 app.post("/destailCommande", (req, res) => {
   const id = Date.now();
   const sql =
-    "INSERT INTO detailscom(`idDetailCom`,	`numCom`,	`desiProd`,	`quantite`) VALUES(?)";
+    "INSERT INTO detailscom(`idDetailCom`,	`numCom`,	`desiProd`,	`prixUnit`, `quantite`) VALUES(?)";
 
   const values = [
     id,
     req.body.numCom,
     req.body.designProduit,
+    req.body.prix,
     req.body.quantProd,
   ];
   Bdd.query(sql, [values], (err, donnees) => {
@@ -408,7 +422,7 @@ app.post("/destailCommande", (req, res) => {
 
 app.get("/recupDetComm/:num", (req, res) => {
   const numCom = req.params.num;
-  const sql = `SELECT det.desiProd, det.quantite, prod.Prix FROM detailscom det JOIN produits prod ON prod.designProd = det.desiProd WHERE numCom = ?`;
+  const sql = `SELECT * FROM detailscom  WHERE numCom = ?`;
   Bdd.query(sql, [numCom], (err, donnees) => {
     if (err) return res.json({ Message: "Impossible de charger les données" });
     return res.json(donnees);
@@ -426,7 +440,7 @@ app.get("/recupNomClient/:num", (req, res) => {
 
 // =================================================================
 //                                                                 =
-//                    LOGIN    et LOGOUT                           =
+//                       LOGIN et LOGOUT                           =
 //                                                                 =
 // =================================================================
 
