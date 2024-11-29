@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const origin = ["https://www.lion-print.net"];
+// const origin = ["http://localhost:3000"];
 
 app.use(
   cors({
