@@ -156,14 +156,9 @@ app.put("/modifUser/:idUser", (req, res) => {
 app.post("/creatProd", (req, res) => {
   const codeProd = "PROD_" + Date.now() * 4;
   const sql =
-    "INSERT INTO produits(`codeProd`, `designProd`, `Prix`, `categorie`) VALUES(?)";
+    "INSERT INTO produits(`codeProd`, `designProd`, `categorie`) VALUES(?)";
 
-  const values = [
-    codeProd,
-    req.body.designation,
-    req.body.prix,
-    req.body.categorie,
-  ];
+  const values = [codeProd, req.body.designation, req.body.categorie];
 
   Bdd.query(sql, [values], (err, donnees) => {
     if (err) return res.json(err);
@@ -196,11 +191,11 @@ app.get("/recupProd/:codeProd", (req, res) => {
 app.put("/modifProd/:codeProd", (req, res) => {
   const codeProd = req.params.codeProd;
   const sql =
-    "UPDATE produits set designProd = ?, Prix = ?, categorie = ? WHERE codeProd = ?";
+    "UPDATE produits set designProd = ?, categorie = ? WHERE codeProd = ?";
 
   Bdd.query(
     sql,
-    [req.body.designation, req.body.prix, req.body.categorie, codeProd],
+    [req.body.designation, req.body.categorie, codeProd],
     (err, donnees) => {
       if (err) return res.json(err);
       return res.json(donnees);
@@ -323,7 +318,7 @@ app.post("/commande", (req, res) => {
 
 // Récupération du numéro de la dernière commande
 app.get("/dernCommande", (req, res) => {
-  const sql = "SELECT * FROM commande ORDER BY numCom DESC LIMIT 1";
+  const sql = "SELECT * FROM commande ORDER BY dateCommande DESC LIMIT 1";
 
   Bdd.query(sql, (err, donnee) => {
     if (err) return res.json(err);
