@@ -318,7 +318,8 @@ app.post("/commande", (req, res) => {
 
 // Récupération du numéro de la dernière commande
 app.get("/dernCommande", (req, res) => {
-  const sql = "SELECT * FROM commande ORDER BY dateCommande DESC LIMIT 1";
+  const sql =
+    "SELECT * FROM commande WHERE statut IS NULL ORDER BY dateCommande DESC LIMIT 1";
 
   Bdd.query(sql, (err, donnee) => {
     if (err) return res.json(err);
