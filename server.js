@@ -330,7 +330,7 @@ app.get("/dernCommande", (req, res) => {
 // Récupération de toutes les commandes dont le statut n'est pas NULL
 app.get("/recupCmds", (req, res) => {
   const sql =
-    "SELECT * FROM commande WHERE statut IS NOT NULL ORDER BY numCom DESC ";
+    "SELECT * FROM commande WHERE statut IS NOT NULL ORDER BY dateCommande";
 
   Bdd.query(sql, (err, donnee) => {
     if (err) return res.json(err);
@@ -378,6 +378,29 @@ app.put("/annuler/:numCom", (req, res) => {
   const sql = `UPDATE commande SET statut = ?  WHERE numCom = ?`;
 
   Bdd.query(sql, [statut, num], (err, donnee) => {
+    if (err) return res.json(err);
+    return res.json(donnee);
+  });
+});
+
+// Modifier l'état d'une commande
+app.put("/cde_etat_en_cours/:numCom", (req, res) => {
+  const etat = "Demande en cours";
+  const num = req.params.numCom;
+  const sql = `UPDATE commande SET etat = ?  WHERE numCom = ?`;
+
+  Bdd.query(sql, [etat, num], (err, donnee) => {
+    if (err) return res.json(err);
+    return res.json(donnee);
+  });
+});
+
+app.put("/cde_etat_valide/:numCom", (req, res) => {
+  const etat = "Demande validée";
+  const num = req.params.numCom;
+  const sql = `UPDATE commande SET etat = ?  WHERE numCom = ?`;
+
+  Bdd.query(sql, [etat, num], (err, donnee) => {
     if (err) return res.json(err);
     return res.json(donnee);
   });
@@ -432,6 +455,16 @@ app.get("/recupNomClient/:num", (req, res) => {
   Bdd.query(sql, [numCom], (err, donnees) => {
     if (err) return res.json({ Message: "Impossible de charger les données" });
     return res.json(donnees);
+  });
+});
+
+// SUPPRESSION D'UN ELEMENT DE LA COMMANDE
+app.delete("/suppElmtCde/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "DELETE FROM detailscom WHERE idDetailCom = ?";
+  Bdd.query(sql, [id], (err, resultat) => {
+    if (err) return res.json(err);
+    return res.json(resultat);
   });
 });
 
